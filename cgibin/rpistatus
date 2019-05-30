@@ -1,0 +1,33 @@
+#!/bin/bash
+
+prefix="rpi"
+if [ $# -eq 0 ] 
+then 
+	for i in $(seq -w 01 20)
+	do
+        CONCAT=$prefix$i
+        SYSTEM=`ping -c 1 $CONCAT`
+        STATUS=`echo $?`
+
+        if [ $STATUS -eq 0 ]  
+	then
+                echo "$CONCAT : alive"
+        else
+                echo "$CONCAT : dead"
+        fi
+	done
+else  
+	for i 
+	do 
+        SYSTEM=`ping -c 1 $i`
+        STATUS=`echo $?`
+
+        if [ $STATUS -eq 0 ]  
+        then
+                echo "$i : alive"
+        else
+                echo "$i : dead"
+        fi
+	done 
+fi 
+exit 0
